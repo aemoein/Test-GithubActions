@@ -1,4 +1,4 @@
-name: Build and Run C Program
+name: Python and LS Jobs Workflow
 
 on:
   push:
@@ -9,18 +9,33 @@ on:
       - main
 
 jobs:
-  build:
+  python-app:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install GCC
-      run: sudo apt-get install -y gcc
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
 
-    - name: Compile the C program
-      run: gcc -o hello hello.c
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Run the compiled program
-      run: ./hello
+    - name: Run the Python app
+      run: python your_python_app.py
+
+    - name: List directory contents
+      run: ls -al
+
+  list-directory:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: List directory contents
+      run: ls -al
