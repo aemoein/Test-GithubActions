@@ -1,13 +1,8 @@
 name: Python and LS Jobs Workflow
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
+    - main
 
 jobs:
   python-app:
