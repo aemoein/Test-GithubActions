@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
         # Use the cache hit/miss to optimize the install step
-        if: steps.pip-cache.outputs.cache-hit != 'true'
+        # if: steps.pip-cache.outputs.cache-hit != 'true'
 
       - name: Run Python tests
         run: pytest
