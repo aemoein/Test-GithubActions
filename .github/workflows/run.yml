@@ -2,6 +2,11 @@ name: Python and LS Jobs Workflow
 
 on:
   workflow_dispatch:
+    inputs:
+      layers:
+        description: 'Number of directory layers to display with the tree command'
+        required: true
+        default: '1'
 
 jobs:
   python-app:
@@ -24,10 +29,10 @@ jobs:
         run: python main.py
 
       - name: Install tree command
-        run: sudo apt-get update && sudo apt-get install -y tree 
+        run: sudo apt-get update && sudo apt-get install -y tree
 
       - name: List directory contents
-        run: tree -d
+        run: tree -d -L ${{ github.event.inputs.layers }}
 
   list-directory:
     runs-on: ubuntu-latest
@@ -36,7 +41,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install tree command
-        run: sudo apt-get update && sudo apt-get install -y tree 
+        run: sudo apt-get update && sudo apt-get install -y tree
 
       - name: List directory contents
-        run: tree -d
+        run: tree -d -L ${{ github.event.inputs.layers }}
