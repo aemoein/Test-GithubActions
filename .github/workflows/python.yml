@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12']
+        python-version: ['3.8', '3.9', '3.10']
 
     steps:
       - name: Checkout code
@@ -45,6 +45,7 @@ jobs:
         if: success()
         uses: rtCamp/action-slack-notify@v2
         with:
+          # Adjust these inputs based on the action's documentation
           status: success
           fields: repo,commit,author,link
         env:
@@ -54,6 +55,7 @@ jobs:
         if: failure()
         uses: rtCamp/action-slack-notify@v2
         with:
+          # Adjust these inputs based on the action's documentation
           status: failure
           fields: repo,commit,author,link
         env:
