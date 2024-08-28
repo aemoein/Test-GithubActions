@@ -7,8 +7,11 @@ jobs:
   create-file:
     runs-on: ubuntu-latest
     steps:
+      - name: Set Name Variable
+        run: echo "NAME=Ahmed" >> $GITHUB_ENV
+
       - name: Echo Name into File
-        run: echo "${{ vars.NAME }}" > name.txt
+        run: echo "${NAME}" > name.txt
 
       - name: Save Name File as Artifact
         uses: actions/upload-artifact@v3

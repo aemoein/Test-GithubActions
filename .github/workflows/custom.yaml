@@ -1,0 +1,16 @@
+name: Fetch Weather Data Using API
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch-weather:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Weather Data
+        env:
+          API_KEY: 85923ecf0aee7432dd17a6656f8065e3
+        run: |
+          echo "Fetching weather data"
+          response=$(curl -s "http://api.openweathermap.org/data/2.5/weather?q=Cairo&appid=${API_KEY}")
+          echo "Fetched Data: $response"
