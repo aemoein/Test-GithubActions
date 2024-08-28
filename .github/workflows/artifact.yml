@@ -1,0 +1,33 @@
+name: Echo Name and View Artifact
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Name Variable
+        run: echo "NAME=Ahmed" >> $GITHUB_ENV
+
+      - name: Echo Name into File
+        run: echo "${NAME}" > name.txt
+
+      - name: Save Name File as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: name-file
+          path: name.txt
+
+  view-file:
+    runs-on: ubuntu-latest
+    needs: create-file
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: name-file
+          path: .
+
+      - name: Display File Content
+        run: cat name.txt
